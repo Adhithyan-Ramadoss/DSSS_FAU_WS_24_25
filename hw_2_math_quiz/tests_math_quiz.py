@@ -12,6 +12,18 @@ class TestMathGame(unittest.TestCase):
             rand_num = get_random_integer(min_val, max_val)
             self.assertTrue(min_val <= rand_num <= max_val)
 
+    def test_get_random_integer_error(self):
+        # Test if failure cases are raises
+            test_cases = [
+                (-5, -10),
+                (5, -10),
+                (5.1, 10),
+                (5, 10.1),
+            ]
+            for min_val, max_val in test_cases:
+                with self.assertRaises(ValueError):
+                    get_random_integer(min_val, max_val)
+
     def test_get_random_operator(self):
         for _ in range(1000):  # Test a large number of random values
             rand_opr = get_random_operator()
@@ -31,6 +43,14 @@ class TestMathGame(unittest.TestCase):
                 received_problem, received_answer = process_numbers(num1, num2, operator)
                 self.assertEqual(received_problem, expected_problem)
                 self.assertEqual(received_answer, expected_answer)
+
+    def test_process_numbers_error(self):
+            test_cases = [
+                (-5, 2, '/'),
+            ]
+            for num1, num2, operator, in test_cases:
+                with self.assertRaises(ValueError):
+                    process_numbers(num1, num2, operator)
 
 if __name__ == "__main__":
     unittest.main()

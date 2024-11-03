@@ -23,6 +23,11 @@ def get_random_integer(minimum_value: int, maximum_value: int) -> int:
     """
     if minimum_value >= maximum_value:
         raise ValueError("minimum_value must be smaller than maximum_value")
+    if not isinstance(minimum_value, int):
+        raise ValueError("minimum_value must be an Integer")
+    if not isinstance(maximum_value, int):
+        raise ValueError("maximum_value must be an Integer")
+
     return random.randint(minimum_value, maximum_value)
 
 
@@ -74,8 +79,10 @@ def process_numbers(number_1: int, number_2: int, operator: str) -> [str, int]:
         problem_answer = number_1 + number_2
     elif operator == '-':
         problem_answer = number_1 - number_2
-    else:
+    elif operator == '*':
         problem_answer = number_1 * number_2
+    else:
+        raise ValueError("Incompatible operator")
     return problem_statement, problem_answer
 
 def get_total_number_of_questions() -> int:
